@@ -4,7 +4,10 @@ require("dotenv").config();
 const cors = require("cors");
 
 const {
-    gamesRouter, cartRouter,
+  gamesRouter,
+  cartRouter,
+  customersRouter,
+  authRouter,
 } = require("../modules/controller/routes");
 
 const app = express();
@@ -14,13 +17,14 @@ app.use(cors({ origins: "*" }));
 app.use(express.json({ limit: "50mb" }));
 
 app.get("/", (req, res) => {
-    res.send("Bienvenido a CapyGames");
+  res.send("Bienvenido a CapyGames");
 });
 
 app.use("/games", gamesRouter);
 app.use("/cart", cartRouter);
-
+app.use("/customers", customersRouter);
+app.use("/auth", authRouter);
 
 module.exports = {
-    app,
+  app,
 };

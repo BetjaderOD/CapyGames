@@ -1,7 +1,7 @@
 const { Response, Router } = require('express');
 const { validateError } = require ("../../../utils/functions");
-const { findAll} = require("./cart.gateway");
-const {findById} = require("../game/game.gateway");
+const { findAll, findById} = require("./cart.gateway");
+
 
 const getAll = async (req, res = Response) => {
     try {

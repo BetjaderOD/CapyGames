@@ -1,0 +1,110 @@
+create schema capygames;
+
+use capygames;
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+flush privileges;
+
+CREATE TABLE games (
+
+game_id INT NOT NULL AUTO_INCREMENT,
+
+game_name VARCHAR(255) NOT NULL,
+
+game_genre VARCHAR(255) NOT NULL,
+
+game_price INT NOT NULL,
+
+game_image VARCHAR(255) NOT NULL,
+
+game_description VARCHAR(255) NOT NULL,
+
+game_stock INT NOT NULL,
+
+PRIMARY KEY (game_id)
+
+);
+
+
+
+CREATE TABLE customers (
+
+customer_id INT NOT NULL AUTO_INCREMENT,
+
+customer_name VARCHAR(255) NOT NULL,
+
+customer_password VARCHAR(255) NOT NULL,
+
+customer_email VARCHAR(255) NOT NULL,
+
+customer_address VARCHAR(255) NOT NULL,
+
+customer_phone VARCHAR(255) NOT NULL,
+
+PRIMARY KEY (customer_id)
+
+);
+
+
+CREATE TABLE cart (
+
+cart_id INT NOT NULL AUTO_INCREMENT,
+
+customer_id INT NOT NULL,
+
+game_id INT NOT NULL,
+
+cart_quantity INT NOT NULL,
+
+PRIMARY KEY (cart_id),
+
+FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+
+FOREIGN KEY (game_id) REFERENCES games(game_id)
+
+);
+
+
+CREATE TABLE orders (
+
+order_id INT NOT NULL AUTO_INCREMENT,
+
+customer_id INT NOT NULL,
+
+game_id INT NOT NULL,
+
+cart_id INT NOT NULL,
+
+order_date DATETIME NOT NULL,
+
+order_status VARCHAR(255) NOT NULL,
+
+PRIMARY KEY (order_id),
+
+FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+
+FOREIGN KEY (game_id) REFERENCES games(game_id),
+
+FOREIGN KEY (cart_id) REFERENCES cart(cart_id)
+
+);
+
+
+CREATE TABLE admin (
+
+admin_id INT NOT NULL AUTO_INCREMENT,
+
+admin_name VARCHAR(255) NOT NULL,
+
+admin_password VARCHAR(255) NOT NULL,
+
+PRIMARY KEY (admin_id)
+
+);
+
+INSERT INTO games (game_name, game_genre, game_price, game_image, game_description, game_stock) VALUES
+
+('God of War', 'Action', 100, 'godofwar.jpg', 'God of War is a third-person action-adventure video game developed by Santa Monica Studio ', 10);
+
+
+select * from games;

@@ -9,8 +9,24 @@ const findById = async (id) => {
     const sql = "select games.game_name, customers.customer_name, cart.cart_id from cart, games, customers where cart.game_id = games.game_id and cart.customer_id = customers.customer_id and cart.cart_id = ?;";
     return await query(sql, [id]);
 }
+const save = async (cart) => {
+
+    if (
+        !cart.game_id ||
+        !cart.costumers_id||
+        !cart.cart_quantity
+    )
+        throw Error('Missing fields');
+    const sql = "INSERT INTO cart (game_id, customer_id, cart_quantity) VALUES (?, ?,?);";
+    const { insertedId } = await query(sql, [
+        cart.game_id,
+        cart.costumers_id,
+        cart.cart_quantity
+    ]);
+    return { ...cart, id: insertedId };
+}
 module.exports = {
     findAll,
     findById,
-
+    save,
 }

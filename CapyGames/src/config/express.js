@@ -4,7 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 
 const {
-    gamesRouter,
+    gamesRouter, cartRouter,
 } = require("../modules/controller/routes");
 
 const app = express();
@@ -18,6 +18,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/games", gamesRouter);
+app.use("/cart", cartRouter);
+
 
 module.exports = {
     app,

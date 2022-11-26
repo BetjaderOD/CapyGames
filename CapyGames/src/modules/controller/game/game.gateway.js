@@ -8,7 +8,7 @@ const findAll = async () => {
 const findById = async (id) => {
     if (Number.isNaN(id)) throw Error('Wrong type');
     if (!id) throw Error('Missing fields');
-    const sql = `SELECT * FROM games WHERE id = ?`;
+    const sql = `SELECT * FROM games WHERE game_id = ?`;
     return await query(sql, [id]);
 };
 
@@ -22,7 +22,7 @@ const save = async (game) => {
       !game.stock
     )
       throw Error('Missing fields');
-    const sql = `INSERT INTO games (name, genre, price, image, description, stock) VALUES (?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO games (game_name, game_genre, game_price, game_image, game_description, game_stock) VALUES (?, ?, ?, ?, ?, ?)`;
     const { insertedId } = await query(sql, [
         game.name,
         game.genre,
@@ -31,11 +31,12 @@ const save = async (game) => {
         game.description,
         game.stock
     ]);
-    return { id: insertedId, ...game };
+    return { ...game, id: insertedId };
 };
 
 const update = async (game) => {
     if (
+        !game.id ||
         !game.name ||
         !game.genre ||
         !game.price ||
@@ -44,7 +45,7 @@ const update = async (game) => {
         !game.stock
         )
         throw Error('Missing fields');
-    const sql = `UPDATE games SET name = ?, genre = ?, price = ?, image = ?, description = ?, stock = ? WHERE id = ?`;
+    const sql = `UPDATE games SET game_name = ?, game_genre = ?, game_price = ?, game_image = ?, game_description = ?, game_stock = ? WHERE game_id = ?`;
     const { insertedId } = await query(sql, [
         game.name,
         game.genre,
@@ -54,11 +55,11 @@ const update = async (game) => {
         game.stock,
         game.id
     ]);
-    return { id: insertedId, ...game };
+    return { ...game, id: insertedId };
 };
 
 const remove = async (id) => {
-    const sql = `DELETE FROM games WHERE id = ?`;
+    const sql = `DELETE FROM games WHERE game_id = ?`;
     return await query(sql, [id]);
 };
 

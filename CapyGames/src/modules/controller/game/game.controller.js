@@ -48,8 +48,9 @@ const insert = async (req, res = Response) => {
 
 const updateGame = async (req, res = Response) => {
     try {
-        const { name, genre, price, image, description, stock } = req.body;
+        const { id, name, genre, price, image, description, stock } = req.body;
         const game = await update({
+            id,
             name,
             genre,
             price,

@@ -1,7 +1,7 @@
 const { Response, Router } = require('express');
 const { validateError } = require ("../../../utils/functions");
 
-const { findAll, findById, saveOrder, updateOrder, removeOrder } = require("./order.gateway");
+const { findAll, findById, saveOrder, update, removeOrder } = require("./order.gateway");
 
 const getAll = async (res = Response) => {
     try {
@@ -49,7 +49,7 @@ const insert = async (req, res = Response) => {
 const updateOrder = async (req, res = Response) => {
     try {
         const { customer_id, game_id, cart_id, order_date, order_status} = req.body;
-        const order = await updateOrder({
+        const order = await update({
             customer_id,
             game_id,
             cart_id,

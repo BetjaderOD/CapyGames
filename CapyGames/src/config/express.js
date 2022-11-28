@@ -6,7 +6,7 @@ const cors = require("cors");
 const {
   gamesRouter,
   cartRouter,
-  coustumersRouter,
+  customersRouter,
   authRouter,
 } = require("../modules/controller/routes");
 
@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 app.use("/games", gamesRouter);
 app.use("/cart", cartRouter);
-app.use("/customers", coustumersRouter);
+app.use("/customers", customersRouter);
 app.use("/auth", authRouter);
 
 module.exports = {

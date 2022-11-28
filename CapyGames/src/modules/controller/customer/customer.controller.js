@@ -84,14 +84,14 @@ const deleteCustomer = async (req, res = Response) => {
   }
 };
 
-const coustumersRouter = Router();
+const customersRouter = Router();
 
-coustumersRouter.get("/", [], getAll);
-coustumersRouter.get("/:customer_id", [], getById);
-coustumersRouter.post("/", [], insert);
-coustumersRouter.put("/", [], updateCustomer);
-coustumersRouter.delete("/:customer_id", [], deleteCustomer);
+customersRouter.get("/", [], getAll);
+customersRouter.get("/:id", [], getById);
+customersRouter.post("/", [], insert);
+customersRouter.put("/", [], updateCustomer);
+customersRouter.delete("/:id", [], deleteCustomer);
 
 module.exports = {
-  coustumersRouter,
+  customersRouter,
 };

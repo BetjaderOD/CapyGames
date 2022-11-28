@@ -2,7 +2,6 @@ const { Response, Router } = require("express");
 const { validateError } = require("../../../utils/functions");
 const { findAll, findById, save, update, remove } = require("./cart.gateway");
 
-<<<<<<< HEAD
 const getAll = async (res = Response) => {
     try {
         const cart = await findAll();
@@ -13,29 +12,6 @@ const getAll = async (res = Response) => {
         const message = validateError(error);
         res.status(400).json({ message });
     }
-}
-const getById = async (req, res = Response) => {
-    try {
-        const { id } = req.params;
-        const cart = await findById(id);
-        res.status(200).json(cart);
-
-    }catch(error) {
-        console.log(error);
-        const message = validateError(error);
-        res.status(400).json({ message });
-    }
-=======
-const getAll = async (req, res = Response) => {
-  try {
-    const cart = await findAll();
-    res.status(200).json(cart);
-  } catch (error) {
-    console.log(error);
-    const message = validateError(error);
-    res.status(400).json({ message });
-  }
->>>>>>> 66a8fa2971bd4c85afae74ea5c6fe5d44d0de802
 };
 
 const getById = async (req, res = Response) => {

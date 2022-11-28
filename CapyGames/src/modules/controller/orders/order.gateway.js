@@ -37,7 +37,7 @@ const saveOrder = async (order) => {
 };
 
 
-const updateOrder = async (order) => {
+const update = async (order) => {
     if (
         !order.customer_id ||
         !order.game_id ||
@@ -66,6 +66,6 @@ module.exports = {
     findAll,
     findById,
     saveOrder,
-    updateOrder,
+    update,
     removeOrder
 };

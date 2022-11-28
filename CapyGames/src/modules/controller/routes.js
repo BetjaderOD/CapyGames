@@ -5,5 +5,5 @@ const { orderRouter } = require("./orders/order.controller");
 module.exports = {
     gamesRouter,
     cartRouter,
-    orderRouter,
+    orderRouter
 };

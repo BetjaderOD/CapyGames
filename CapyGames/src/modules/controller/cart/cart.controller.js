@@ -3,7 +3,7 @@ const { validateError } = require ("../../../utils/functions");
 const { findAll, findById, save} = require("./cart.gateway");
 
 
-const getAll = async (req, res = Response) => {
+const getAll = async (res = Response) => {
     try {
         const cart = await findAll();
         res.status(200).json(cart);

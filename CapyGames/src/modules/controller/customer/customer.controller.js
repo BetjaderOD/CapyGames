@@ -22,6 +22,7 @@ const getAll = async (req, res = Response) => {
 const getById = async (req, res = Response) => {
   try {
     const { customer_id } = req.params;
+    console.log(req.params);
     const results = await findById(customer_id);
     res.status(200).json(results);
   } catch (err) {
@@ -33,16 +34,16 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
   try {
-    const { name, password, email, address, phone } = req.body;
+    const { customer_name , customer_password , customer_email , customer_address , customer_phone  } = req.body;
     console.log(req.body);
-    const custumer = await save({
-      name,
-      password,
-      email,
-      address,
-      phone,
+    const customer = await save({
+      customer_name ,
+      customer_password ,
+      customer_email ,
+      customer_address ,
+      customer_phone,
     });
-    res.status(200).json(custumer);
+    res.status(200).json(customer);
   } catch (error) {
     console.log(error);
     const message = validateError(error);
@@ -52,16 +53,18 @@ const insert = async (req, res = Response) => {
 
 const updateCustomer = async (req, res = Response) => {
   try {
-    const { id, name, password, email, address, phone } = req.body;
-    const custumer = await update({
-      id,
-      name,
-      password,
-      email,
-      address,
-      phone,
+    const { customer_name, customer_password, customer_email, customer_address, customer_phone, customer_id  } = req.body;
+    const customer = await update({
+
+      customer_name ,
+      customer_password ,
+      customer_email ,
+      customer_address ,
+      customer_phone ,
+      customer_id
     });
-    res.status(200).json(custumer);
+    console.log(req.body);
+    res.status(200).json(customer);
   } catch (error) {
     console.log(error);
     const message = validateError(error);
@@ -84,10 +87,10 @@ const deleteCustomer = async (req, res = Response) => {
 const coustumersRouter = Router();
 
 coustumersRouter.get("/", [], getAll);
-coustumersRouter.get("/:id", [], getById);
+coustumersRouter.get("/:customer_id", [], getById);
 coustumersRouter.post("/", [], insert);
 coustumersRouter.put("/", [], updateCustomer);
-coustumersRouter.delete("/:id", [], deleteCustomer);
+coustumersRouter.delete("/:customer_id", [], deleteCustomer);
 
 module.exports = {
   coustumersRouter,

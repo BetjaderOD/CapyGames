@@ -34,14 +34,14 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
   try {
-    const { customer_name , customer_password , customer_email , customer_address , customer_phone  } = req.body;
+    const { name, password, email, address, phone } = req.body;
     console.log(req.body);
     const customer = await save({
-      customer_name ,
-      customer_password ,
-      customer_email ,
-      customer_address ,
-      customer_phone,
+      name,
+      password,
+      email,
+      address,
+      phone,
     });
     res.status(200).json(customer);
   } catch (error) {

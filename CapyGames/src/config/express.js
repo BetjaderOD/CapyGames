@@ -8,6 +8,7 @@ const {
   cartRouter,
   customersRouter,
   authRouter,
+  orderRouter,
 } = require("../modules/controller/routes");
 
 const app = express();
@@ -24,6 +25,7 @@ app.use("/games", gamesRouter);
 app.use("/cart", cartRouter);
 app.use("/customers", customersRouter);
 app.use("/auth", authRouter);
+app.use("/order", orderRouter);
 
 module.exports = {
   app,

@@ -23,7 +23,6 @@ const save = async (customer) => {
   const hashedPassword = await hashPassword(customer.customer_password);
   const sql = `INSERT INTO customers (customer_name, customer_password, customer_email, customer_address, customer_phone) VALUES (?,?,?,?,?);`;
   const { insertId } = await query(sql, [
-
     customer.customer_name,
     hashedPassword,
     customer.customer_email,

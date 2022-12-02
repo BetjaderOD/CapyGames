@@ -1,12 +1,9 @@
 const { query } = require("../../../utils/mysql");
 
-//Todas las ordenes
 const findAll = async () => {
     const sql = "SELECT * FROM orders ";
     return await query(sql, []);
 };
-
-//traer orden por id
 
 const findById = async (id) => {
     if (Number.isNaN(id)) throw Error('Wrong type');
@@ -16,7 +13,7 @@ const findById = async (id) => {
 };
 
 
-const saveOrder = async (order) => {
+const save = async (order) => {
     if (
         !order.customer_id ||
         !order.game_id ||
@@ -57,7 +54,7 @@ const update = async (order) => {
     return { ...order, id: insertedId };
 };
 
-const removeOrder = async (id) => {
+const remove = async (id) => {
     const sql = `DELETE FROM orders WHERE order_id = ?`;
     return await query(sql, [id]);
 };
@@ -65,7 +62,7 @@ const removeOrder = async (id) => {
 module.exports = {
     findAll,
     findById,
-    saveOrder,
+    save,
     update,
-    removeOrder
+    remove
 };

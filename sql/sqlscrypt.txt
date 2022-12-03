@@ -5,6 +5,7 @@ use capygames;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
 flush privileges;
 
+
 CREATE TABLE games (
 
 game_id INT NOT NULL AUTO_INCREMENT,
@@ -100,6 +101,30 @@ admin_password VARCHAR(255) NOT NULL,
 
 PRIMARY KEY (admin_id)
 
+);
+
+CREATE TABLE reviews (
+
+review_id INT NOT NULL AUTO_INCREMENT,
+
+customer_id INT NOT NULL,
+
+game_id INT NOT NULL,
+
+review_date DATETIME NOW() NOT NULL,
+
+review_title VARCHAR(255) NOT NULL,
+
+review_description VARCHAR(255) NOT NULL,
+
+review_rating INT NOT NULL,
+
+PRIMARY KEY (review_id),
+
+FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+
+FOREIGN KEY (game_id) REFERENCES games(game_id)
+    
 );
 
 INSERT INTO games (game_name, game_genre, game_price, game_image, game_description, game_stock) VALUES

@@ -1,8 +1,8 @@
-const { Response, Router } = require('express');
+const { Respose, Router } = require('express');
 const { validateError } = require('../../../utils/functions');
 const { login } = require('./auth.gateway');
 
-const signin = async (req, res = Response) => {
+const signin = async (req, res = Respose) => {
   try {
     const { email, password } = req.body;
     const token = await login({ email, password });

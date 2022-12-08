@@ -13,21 +13,21 @@ const findById = async (customer_id) => {
 
 const save = async (customer) => {
   if (
-      !customer.customer_name ||
-      !customer.customer_password ||
-      !customer.customer_email ||
-      !customer.customer_address ||
-      !customer.customer_phone
+    !customer.name ||
+    !customer.password ||
+    !customer.email ||
+    !customer.address ||
+    !customer.phone
   )
     throw Error("Missing fields");
-  const hashedPassword = await hashPassword(customer.customer_password);
+  const hashedPassword = await hashPassword(customer.password);
   const sql = `INSERT INTO customers (customer_name, customer_password, customer_email, customer_address, customer_phone) VALUES (?,?,?,?,?);`;
   const { insertId } = await query(sql, [
-    customer.customer_name,
+    customer.name,
     hashedPassword,
-    customer.customer_email,
-    customer.customer_address,
-    customer.customer_phone
+    customer.email,
+    customer.address,
+    customer.phone,
   ]);
   delete customer.password;
   return { ...customer, id: insertId };
@@ -35,26 +35,24 @@ const save = async (customer) => {
 
 const update = async (customer) => {
   if (
-
     !customer.customer_name ||
     !customer.customer_password ||
     !customer.customer_email ||
     !customer.customer_address ||
     !customer.customer_phone ||
-      !customer.customer_id
+    !customer.customer_id
   )
     throw Error("Missing fields");
-  console.log(customer)
+  console.log(customer);
   const sql = `UPDATE customers SET customer_name=?, customer_password=?, customer_email=?, customer_address=?, customer_phone=? WHERE customer_id=?;`;
   const password = await hashPassword(customer.customer_password);
   const { insertId } = await query(sql, [
-
     customer.customer_name,
     password,
     customer.customer_email,
     customer.customer_address,
     customer.customer_phone,
-    customer.customer_id
+    customer.customer_id,
   ]);
   delete customer.password;
   return { ...customer, id: insertId };

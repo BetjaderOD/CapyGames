@@ -1,4 +1,5 @@
 const { Response, Router } = require("express");
+const { transporter, template } = require("../../../utils/email-service");
 const { validateError } = require("../../../utils/functions");
 const {
     findAll,
@@ -32,10 +33,9 @@ const getById = async (req, res = Response) => {
   }
 };
 
-const insert = async (req, res = Response) => {
+const saveAndFlush = async (req, res = Response) => {
   try {
     const { name, password, email, address, phone } = req.body;
-    console.log(req.body);
     const customer = await save({
       name,
       password,
@@ -43,6 +43,13 @@ const insert = async (req, res = Response) => {
       address,
       phone,
     });
+    const info = await transporter.sendMail({
+      from: `CapyGames <${ process.env.EMAIL_USER }>`,
+      to: email,
+      subject: `Welcome to CapyGames, <${ name }>`,
+      html: template("Hello and welcome to Capy Games Family, my name is Capybara, but you can call me Capy c:", email),
+    });
+    console.log(info);
     res.status(200).json(customer);
   } catch (error) {
     console.log(error);
@@ -88,7 +95,7 @@ const customersRouter = Router();
 
 customersRouter.get("/", [], getAll);
 customersRouter.get("/:id", [], getById);
-customersRouter.post("/", [], insert);
+customersRouter.post("/", [], saveAndFlush);
 customersRouter.put("/", [], updateCustomer);
 customersRouter.delete("/:id", [], deleteCustomer);
 

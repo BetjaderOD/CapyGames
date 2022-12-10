@@ -2,7 +2,9 @@ const { query } = require("../../../utils/mysql");
 
 const findAll = async () => {
   const sql =
-    "select games.game_name, customers.customer_name, cart.cart_id , cart.cart_quantity from cart, games, customers where cart.game_id = games.game_id and cart.customer_id = customers.customer_id;";
+      //select game, price, quantity, total price
+    "select games.game_name, games.game_price, cart.cart_quantity, (games.game_price * cart.cart_quantity) as total_price from cart, games where cart.game_id = games.game_id;";
+
   return await query(sql, []);
 };
 
@@ -10,7 +12,7 @@ const findById = async (id) => {
   if (Number.isNaN(id)) throw Error("Wrong type");
   if (!id) throw Error("Missing fields");
   const sql =
-    "select games.game_name, customers.customer_name, cart.cart_id , cart.cart_quantity from cart, games, customers where cart.game_id = games.game_id and cart.customer_id = customers.customer_id and cart.cart_id = ?;";
+    "select games.game_name, games.game_price, cart.cart_quantity, games.game_price * cart.cart_quantity as total_price from cart, games where cart.game_id = games.game_id and cart.cart_id = ?;";
   return await query(sql, [id]);
 };
 

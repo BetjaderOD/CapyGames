@@ -12,7 +12,7 @@ const findById = async (id) => {
   if (Number.isNaN(id)) throw Error("Wrong type");
   if (!id) throw Error("Missing fields");
   const sql =
-    "select games.game_name, games.game_price, cart.cart_quantity, games.game_price * cart.cart_quantity as total_price from cart, games where cart.game_id = games.game_id and cart.cart_id = ?;";
+"select games.game_name, games.game_price, cart.cart_quantity, games.game_price * cart.cart_quantity as total_price from cart, games where cart.game_id = games.game_id and cart.customer_id = ?;";
   return await query(sql, [id]);
 };
 

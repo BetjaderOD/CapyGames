@@ -46,8 +46,8 @@ const saveAndFlush = async (req, res = Response) => {
     const info = await transporter.sendMail({
       from: `CapyGames <${ process.env.EMAIL_USER }>`,
       to: email,
-      subject: `Welcome to CapyGames, <${ name }>`,
-      html: template("Hello and welcome to Capy Games Family, my name is Capybara, but you can call me Capy c:", email),
+      subject: `Welcome to CapyGames!, ${ name }`,
+      html: template("Hello and welcome to Capy Games Family, my name is Capybara, but you can call me Capy c:", email, "https://capygames.com"),
     });
     console.log(info);
     res.status(200).json(customer);

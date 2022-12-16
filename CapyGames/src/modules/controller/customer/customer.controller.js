@@ -35,19 +35,19 @@ const getById = async (req, res = Response) => {
 
 const saveAndFlush = async (req, res = Response) => {
   try {
-    const { name, password, email, address, phone } = req.body;
+    const { customer_name, customer_password, customer_email, customer_address, customer_phone } = req.body;
     const customer = await save({
-      name,
-      password,
-      email,
-      address,
-      phone,
+      customer_name,
+      customer_password,
+      customer_email,
+      customer_address,
+      customer_phone,
     });
     const info = await transporter.sendMail({
       from: `CapyGames <${ process.env.EMAIL_USER }>`,
-      to: email,
-      subject: `Welcome to CapyGames!, ${ name }`,
-      html: template("Hello and welcome to Capy Games Family, my name is Capybara, but you can call me Capy c:", email, "https://capygames.com"),
+      to: customer_email,
+      subject: `Welcome to CapyGames!, ${ customer_name }`,
+      html: template("Hello and welcome to Capy Games Family, my name is Capybara, but you can call me Capy c:", customer_email, "https://capygames.com"),
     });
     console.log(info);
     res.status(200).json(customer);

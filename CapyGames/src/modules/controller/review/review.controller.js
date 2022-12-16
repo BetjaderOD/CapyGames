@@ -27,8 +27,9 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
   try {
+    console.log(req.body);
     const {
-      customer_id,
+
       game_id,
       review_date,
       review_title,
@@ -36,7 +37,7 @@ const insert = async (req, res = Response) => {
       review_rating,
     } = req.body;
     const review = await save({
-      customer_id,
+
       game_id,
       review_date,
       review_title,
@@ -53,9 +54,9 @@ const insert = async (req, res = Response) => {
 
 const updateReview = async (req, res = Response) => {
   try {
+    console.log(req.body);
     const {
       review_id,
-      customer_id,
       game_id,
       review_date,
       review_title,
@@ -64,7 +65,6 @@ const updateReview = async (req, res = Response) => {
     } = req.body;
     const review = await update({
       review_id,
-      customer_id,
       game_id,
       review_date,
       review_title,

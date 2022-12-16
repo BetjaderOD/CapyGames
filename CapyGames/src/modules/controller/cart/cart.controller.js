@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { validateError } = require("../../../utils/functions");
-const { findAll, findById, save, update, remove } = require("./cart.gateway");
+const { findAll, findById, save, update, remove  } = require("./cart.gateway");
 
 const getAll = async (req, res = Response) => {
   try {
@@ -23,9 +23,8 @@ const getById = async (req, res = Response) => {
     const message = validateError(error);
     res.status(400).json({ message });
   }
-
 };
-
+//save
 const insert = async (req, res = Response) => {
   try {
     const { game_id, customer_id, cart_quantity } = req.body;
@@ -77,6 +76,7 @@ cartRouter.get("/:id", [], getById);
 cartRouter.post("/", [], insert);
 cartRouter.put("/", [], updateCart);
 cartRouter.delete("/:id", [], deleteCart);
+
 
 module.exports = {
   cartRouter,

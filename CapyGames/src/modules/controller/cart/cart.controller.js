@@ -28,10 +28,10 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
   try {
-    const { game_id, costumers_id, cart_quantity } = req.body;
+    const { game_id, customer_id, cart_quantity } = req.body;
     const cart = await save({
       game_id,
-      costumers_id,
+      customer_id,
       cart_quantity,
     });
     res.status(200).json(cart);

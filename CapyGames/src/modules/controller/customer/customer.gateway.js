@@ -12,6 +12,7 @@ const findById = async (customer_id) => {
 };
 
 const save = async (customer) => {
+  console.log(customer)
   if (
     !customer.customer_name ||
     !customer.customer_password ||

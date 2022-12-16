@@ -34,6 +34,7 @@ const getById = async (req, res = Response) => {
 };
 
 const saveAndFlush = async (req, res = Response) => {
+  console.log("entra");
   try {
     const { customer_name, customer_password, customer_email, customer_address, customer_phone } = req.body;
     const customer = await save({

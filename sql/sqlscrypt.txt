@@ -133,3 +133,19 @@ INSERT INTO games (game_name, game_genre, game_price, game_image, game_descripti
 
 
 select * from games;
+
+DROP PROCEDURE add_game_to_cart;
+DELIMITER $$
+CREATE PROCEDURE add_game_to_cart(IN customer_id_add INT, IN game_id_add INT)
+BEGIN
+    DECLARE quantity INT;
+    DECLARE cart_id_selected INT;
+    SELECT cart_quantity INTO quantity FROM cart WHERE customer_id = customer_id_add AND game_id = game_id_add;
+    SELECT cart_id INTO cart_id_selected FROM cart WHERE customer_id = customer_id_add AND game_id = game_id_add;
+    IF quantity IS NULL THEN
+        INSERT INTO cart (customer_id, game_id, cart_quantity) VALUES (customer_id_add, game_id_add, 1);
+    ELSE
+        UPDATE cart SET cart_quantity = cart_quantity + 1 WHERE customer_id = customer_id_add AND game_id = game_id_add AND cart_id = cart_id_selected;
+    END IF;
+END$$
+DELIMITER ;
